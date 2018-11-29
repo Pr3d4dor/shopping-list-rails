@@ -1,0 +1,29 @@
+<div class="container">
+  <h2 class="text-center">You have <%= @shopping_lists.count %> shopping lists</h2>
+
+  <% @shopping_lists.each do |shopping_list| %>
+    <div class="list-container col-sm-10 col-md-4 col-lg-3"
+     style="margin-bottom: 20px">
+
+      <h2><%= shopping_list.name %></h2>
+
+      <p class="list-description">
+        <%= shopping_list.description %>
+      </p>
+
+      <% if shopping_list.purchased? %>
+        <h4 style="color: blue">Purchased</h4>
+      <% else %>
+        <h4 style="color: red">Not purchased</h4>
+      <% end %>
+
+      <ul class="nav nav-tabs nav-justified">
+        <li><%= link_to 'Show', shopping_list_path(shopping_list) %></li>
+        <li><%= link_to 'Edit', edit_shopping_list_path(shopping_list) %></li>
+        <li><%= link_to 'Delete', shopping_list_path(shopping_list),
+        method: :delete,
+        data: { confirm: 'Are you sure about this?' }%></li>
+      </ul>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,44 @@
+<div class="container">
+  <h2><%= @shopping_list.name %></h2>
+  <p class="list-description"><%= @shopping_list.description %></p>
+  <% items = @shopping_list.items %>
+  <h4>List:</h4>
+
+  <% if !items.any? %>
+  <p>empty</p>
+  <% else %>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <th class="text-center">Nome</th>
+      <th class="text-center">Quantidade</th>
+      <th class="text-center">Preco Unitario</th>
+      <th class="text-center">Subtotal</th>
+      <th class="text-center"></th>
+    </thead>
+    <tbody>
+      <% items.each do |item| %>
+        <tr>
+          <td class="text-center"><%= item.name %></td>
+          <td class="text-center"><%= item.quantity %></td>
+          <th class="text-center"><%= number_to_currency(item.price) %></th>
+          <th class="text-center"><%= number_to_currency(item.subtotal) %></th>
+          <th class="text-center"><%= link_to 'Remove', shopping_list_item_path(@shopping_list, item), method: :delete, data: { confirm: 'Are you sure about this?' } %></th>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <h4>Total: </h4>
+  <p><%= number_to_currency(@shopping_list.total) %></p>
+  <% end %>
+
+  <h4>Purchased:</h4>
+  <% if @shopping_list.purchased? %>
+    <p>Yes</p>
+  <% else %>
+    <p>No</p>
+  <% end %>
+
+  <p class="add-item-button"><%= link_to 'Add Item', new_shopping_list_item_path(@shopping_list) %>
+  </p>
+</div>
