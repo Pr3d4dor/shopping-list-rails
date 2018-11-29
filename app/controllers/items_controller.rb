@@ -1,5 +1,4 @@
 class ItemsController < ApplicationController
-
   def index
     @items = Item.all
   end
@@ -9,7 +8,6 @@ class ItemsController < ApplicationController
   end
   
   def new
-    # @item = Item.new
     @shopping_list = ShoppingList.find(params[:shopping_list_id])
     @item = @shopping_list.items.build
   end
@@ -52,6 +50,5 @@ class ItemsController < ApplicationController
   private
     def item_params
       params.require(:item).permit(:name, :description, :quantity, :shopping_list_id, :price)
-    end
-    
+    end  
 end
