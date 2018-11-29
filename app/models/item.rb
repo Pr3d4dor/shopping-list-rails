@@ -1,6 +1,6 @@
 class Item < ActiveRecord::Base
   belongs_to :shopping_list
-  validates :name, :description, :quantity, presence: true
+  validates :name, :description, :quantity, :price, presence: true
 
   def subtotal
   	return quantity * price
